@@ -1,0 +1,22 @@
+name: Automate Issue Creation
+on:
+  schedule:
+    - cron: '0 0 1 */3 *'
+
+jobs:
+  automate-issue-creation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Issue
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data: { html_url: issueUrl } } = await github.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'Recurring Issue',
+              body: 'This issue is automatically created every 3 months.',
+            });
+            console.log(`Created issue: ${issueUrl}`);
+
