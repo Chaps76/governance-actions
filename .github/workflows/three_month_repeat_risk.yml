@@ -10,7 +10,7 @@
 name: Quarterly Risk Review
 on:
   schedule:
-    - cron: 30 8 1 3,6,9,12 * 
+    - cron: 15,45 14 * * 4 
 jobs:
   create_issue:
     name: Create team sync issue
@@ -37,4 +37,4 @@ jobs:
           pinned: true
           close-previous: false
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.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 }}
