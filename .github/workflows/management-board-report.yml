@@ -7,19 +7,19 @@
 # To get a newer version, you will need to update the SHA.
 # You can also reference a tag or branch, but the action may change without warning.
 
-name: Quarterly risk action
+name: management board reporting
 on:
   schedule:
-    - cron: 45,50 16 * * 4
+    - cron: 30 08 * * 5
 
 jobs:
   create_issue:
-    name: Create risk review cycle
+    name: Create management report task
     runs-on: ubuntu-latest
     permissions:
       issues: write
     steps:
-      - name: Create risk review cycle
+      - name: Create management report task
         uses: imjohnbo/issue-bot@3d96848fb5e9a4a473bb81ae62b4b4866a56e93a
         with:
           assignees: "Chaps76"
@@ -28,9 +28,10 @@ jobs:
           body: |
             ### Tasks
             
-            [] review risks
-            [] check mitigations
-            [] add/delete risks
+            [] review previous report & actions
+            [] draft content & finalise
+            [] share prior to meeting
+            [] present at meeting & record decisions/actions
                     
             ### Discussion Points
             Add things to discuss below
