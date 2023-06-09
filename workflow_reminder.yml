@@ -1,0 +1,42 @@
+name: Issue Reminder
+
+on:
+  schedule:
+    - cron: '20,40 09,10 * * 5'  
+
+jobs:
+  reminder:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Update issue
+        uses: actions/github-script@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          script: |
+            const github = require('@actions/github');
+
+            async function run() {
+              const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
+              const context = github.context;
+
+              // Get the associated issue number from the reminder event
+              const issueNumber = context.payload.issue.number;
+
+              // Move the issue back to "To Do"
+              await octokit.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: three_month_repeat_risk.yml,
+                state: 'to-do',  // Set the desired state for the issue
+              });
+            }
+
+            run().catch(error => {
+              console.error(error);
+              process.exit(1);
+            });
