@@ -10,7 +10,7 @@
 name: Quarterly Risk Review
 on:
   schedule:
-    - cron: 20,40 09,10 * * 5 
+    - cron: 00 14 * * 5 
 jobs:
   create_issue:
     name: Create team sync issue
